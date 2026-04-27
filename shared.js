@@ -2,7 +2,7 @@
    VIGILANT NEON — Shared Navigation Component
    ============================================ */
 
-const API_BASE = "/smartdoctor/api";
+const API_BASE = "api";
 /**
  * Builds the sidebar and topbar for every page.
  * Call buildNavigation('pageName') where pageName matches a key in NAV_ITEMS.
@@ -66,7 +66,7 @@ NAV_ITEMS.forEach(item => {
     // ✅ Force real page navigation
     a.addEventListener("click", function(e) {
         e.preventDefault();
-        window.location.href = "/smartdoctor/" + item.href;
+        window.location.href = item.href;
     });
 
     nav.appendChild(a);
@@ -604,7 +604,7 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", async function () {
 
     try {
-        const res = await fetch("/smartdoctor/api/me.php", {
+        const res = await fetch("api/me.php", {
             credentials: "include"
         });
 
@@ -631,7 +631,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     accountBtn.addEventListener("click", async function () {
 
-        const res = await fetch("/smartdoctor/api/me.php", {
+        const res = await fetch("api/me.php", {
             credentials: "include"
         });
 
@@ -639,7 +639,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (!data.logged_in) {
             // Not logged in → go to login page
-            window.location.href = "/smartdoctor/login.html";
+            window.location.href = "login.html";
         } else {
             // Logged in → show logout dropdown
             showLogoutMenu(accountBtn);
@@ -672,12 +672,12 @@ function showLogoutMenu(button) {
     menu.innerText = "Logout";
 
     menu.addEventListener("click", async function () {
-        await fetch("/smartdoctor/api/logout.php", {
+        await fetch("api/logout.php", {
             credentials: "include"
         });
 
         menu.remove();
-        window.location.href = "/smartdoctor/login.html";
+        window.location.href = "login.html";
     });
 
     document.body.appendChild(menu);
