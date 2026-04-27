@@ -1,0 +1,5 @@
+male_icu=2
+female_icu=1
+total_icu=3
+bias_score=33.34
+is_biased=false

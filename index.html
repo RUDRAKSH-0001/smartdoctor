@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard — Vigilant Neon Command Center</title>
+    <meta name="description" content="Smart Hospital Resource Allocation Dashboard — Real-time patient monitoring, bed utilization, and AI-driven resource management." />
+    <link rel="stylesheet" href="styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+</head>
+<body>
+    <!-- Main Content -->
+    <div class="main-content" id="main-content">
+        <!-- Canvas -->
+        <main class="canvas">
+            <!-- Alert Banner -->
+            <div class="alert-banner mb-md animate-fade-in" id="alert-icu">
+                <div class="alert-text">
+                    <span class="material-symbols-outlined" style="animation: pulse 1.5s infinite;">warning</span>
+                    <span class="h3 font-space" style="letter-spacing: -0.01em;">ICU ALMOST FULL: 95% CAPACITY REACHED</span>
+                </div>
+                <button class="btn btn-error" onclick="document.getElementById('alert-icu').style.display='none'">
+                    Initiate Protocol
+                </button>
+            </div>
+
+            <!-- Metrics Cards -->
+            <div class="grid-3 mb-md">
+                <!-- Total Patients -->
+                <div class="metric-card cyan animate-fade-in" style="animation-delay: 0.1s;">
+                    <div class="flex justify-between items-center mb-md">
+                        <span class="label-caps text-slate">Total Patients</span>
+                        <span class="metric-badge cyan">+12%</span>
+                    </div>
+                    <div class="metric-value">1,402</div>
+                    <div class="metric-sub mt-md">Across all active wards</div>
+                </div>
+
+                <!-- ICU Beds -->
+                <div class="metric-card error animate-fade-in" style="animation-delay: 0.2s;">
+                    <div class="flex justify-between items-center mb-md">
+                        <span class="label-caps text-slate">ICU Beds Available</span>
+                        <span class="metric-badge error">CRITICAL</span>
+                    </div>
+                    <div class="metric-value" style="color: var(--error);">
+                        <span class="glow-text">04</span>
+                    </div>
+                    <div class="metric-sub mt-md">Out of 80 total capacity</div>
+                </div>
+
+                <!-- Critical Patients -->
+                <div class="metric-card pink animate-fade-in" style="animation-delay: 0.3s;">
+                    <div class="flex justify-between items-center mb-md">
+                        <span class="label-caps text-slate">Critical Patients</span>
+                        <span class="metric-badge pink">STABLE</span>
+                    </div>
+                    <div class="metric-value">87</div>
+                    <div class="metric-sub mt-md">Requiring immediate attention</div>
+                </div>
+            </div>
+
+            <!-- Charts Row -->
+            <div class="grid-2">
+                <!-- Bar Chart -->
+                <div class="glass-panel rounded-xl p-md animate-fade-in" style="animation-delay: 0.4s;">
+                    <div class="flex justify-between items-center mb-md">
+                        <h3 class="h3 text-white">Patient Influx Trends</h3>
+                        <span class="material-symbols-outlined text-slate">more_horiz</span>
+                    </div>
+                    <div style="display: flex; align-items: flex-end; gap: 16px; height: 250px; padding: 0 16px 16px; border-bottom: 1px solid rgba(255,255,255,0.1); position: relative;">
+                        <!-- Y-Axis -->
+                        <div style="position: absolute; left: 0; top: 0; bottom: 0; display: flex; flex-direction: column; justify-content: space-between; font-size: 12px; color: #64748b; padding: 16px 0;">
+                            <span>100</span><span>50</span><span>0</span>
+                        </div>
+                        <!-- Bars -->
+                        <div style="flex: 1; display: flex; align-items: flex-end; justify-content: space-between; margin-left: 32px; height: 100%;">
+                            <div style="width: 32px; background: rgba(6,182,212,0.2); border-radius: 6px 6px 0 0; border-top: 2px solid #22d3ee; box-shadow: 0 -5px 15px rgba(0,242,255,0.2); height: 40%; transition: height 0.5s;"></div>
+                            <div style="width: 32px; background: rgba(6,182,212,0.2); border-radius: 6px 6px 0 0; border-top: 2px solid #22d3ee; box-shadow: 0 -5px 15px rgba(0,242,255,0.2); height: 60%;"></div>
+                            <div style="width: 32px; background: rgba(6,182,212,0.2); border-radius: 6px 6px 0 0; border-top: 2px solid #22d3ee; box-shadow: 0 -5px 15px rgba(0,242,255,0.2); height: 30%;"></div>
+                            <div style="width: 32px; background: rgba(6,182,212,0.2); border-radius: 6px 6px 0 0; border-top: 2px solid #22d3ee; box-shadow: 0 -5px 15px rgba(0,242,255,0.2); height: 80%;"></div>
+                            <div style="width: 32px; background: rgba(255,180,171,0.3); border-radius: 6px 6px 0 0; border-top: 2px solid var(--error); box-shadow: 0 -5px 15px rgba(255,180,171,0.3); height: 95%;"></div>
+                            <div style="width: 32px; background: rgba(6,182,212,0.2); border-radius: 6px 6px 0 0; border-top: 2px solid #22d3ee; box-shadow: 0 -5px 15px rgba(0,242,255,0.2); height: 50%;"></div>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-left: 48px; margin-top: 8px; font-size: 12px; color: #64748b;" class="label-caps">
+                        <span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span><span>SAT</span>
+                    </div>
+                </div>
+
+                <!-- Donut Chart -->
+                <div class="glass-panel rounded-xl p-md animate-fade-in" style="animation-delay: 0.5s; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative;">
+                    <h3 class="h3 text-white" style="position: absolute; top: 24px; left: 24px;">Bed Utilization</h3>
+                    <div style="position: relative; width: 220px; height: 220px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+                        background: conic-gradient(var(--error) 0% 15%, var(--tertiary-container) 15% 35%, var(--primary-container) 35% 100%);
+                        box-shadow: 0 0 30px rgba(0,242,255,0.1);">
+                        <div style="width: 160px; height: 160px; background: var(--surface-container-high); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-direction: column; border: 1px solid rgba(255,255,255,0.05);">
+                            <span class="h2 text-white glow-text">85%</span>
+                            <span class="label-caps text-slate" style="margin-top: 4px;">TOTAL CAPACITY</span>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 24px; margin-top: 24px; font-size: 14px; color: #94a3b8;" class="font-space">
+                        <div class="flex items-center gap-sm"><div style="width: 12px; height: 12px; border-radius: 50%; background: var(--primary-container); box-shadow: 0 0 8px var(--primary-container);"></div> General</div>
+                        <div class="flex items-center gap-sm"><div style="width: 12px; height: 12px; border-radius: 50%; background: var(--error); box-shadow: 0 0 8px var(--error);"></div> ICU</div>
+                        <div class="flex items-center gap-sm"><div style="width: 12px; height: 12px; border-radius: 50%; background: var(--tertiary-container); box-shadow: 0 0 8px var(--tertiary-container);"></div> Surgery</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="shared.js"></script>
+    <script>
+        buildNavigation('dashboard');
+
+        // Load live dashboard data
+        (async function() {
+            const data = await apiFetch('get_dashboard.php');
+            if (!data || !data.stats) return;
+            const s = data.stats;
+
+            // Update metric cards
+            const cards = document.querySelectorAll('.metric-card');
+            if (cards[0]) {
+                cards[0].querySelector('.metric-value').textContent = formatNum(s.total_patients);
+                cards[0].querySelector('.metric-sub').textContent = 'Across all active wards';
+            }
+            if (cards[1]) {
+                cards[1].querySelector('.metric-value').innerHTML = `<span class="glow-text">${String(s.icu_available).padStart(2, '0')}</span>`;
+                cards[1].querySelector('.metric-sub').textContent = `Out of ${s.icu_total} total capacity`;
+                // Update badge
+                const badge = cards[1].querySelector('.metric-badge');
+                if (badge) badge.textContent = s.icu_available <= 5 ? 'CRITICAL' : 'OK';
+            }
+            if (cards[2]) {
+                cards[2].querySelector('.metric-value').textContent = s.critical_count;
+            }
+        })();
+    </script>
+</body>
+</html>

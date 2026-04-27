@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vigilant Neon • Secure Access</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: #070809;
+    color: #e5e1e4;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* subtle grid */
+body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(rgba(0,242,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,242,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: -2;
+    pointer-events: none;
+}
+
+/* radial accent */
+body::after {
+    content: "";
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(0,242,255,0.08), transparent 70%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.login-container {
+    width: 380px;
+    padding: 50px 40px;
+    background: rgba(18, 20, 24, 0.95);
+    border-radius: 18px;
+    border: 1px solid rgba(0, 242, 255, 0.15);
+    box-shadow:
+        0 0 40px rgba(0, 242, 255, 0.1),
+        inset 0 0 40px rgba(0, 242, 255, 0.05);
+}
+
+.brand {
+    text-align: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    letter-spacing: 3px;
+    font-size: 14px;
+    margin-bottom: 30px;
+    color: #00f2ff;
+}
+
+.title {
+    font-family: 'Space Grotesk', sans-serif;
+    text-transform: uppercase;
+    font-size: 22px;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+    text-align: center;
+    color: #ffffff;
+}
+
+.input-group {
+    margin-bottom: 18px;
+}
+
+input {
+    width: 100%;
+    padding: 14px;
+    background: #121418;
+    border: 1px solid #2a2f35;
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 14px;
+    outline: none;
+    transition: 0.3s;
+}
+
+input:focus {
+    border-color: #00f2ff;
+    box-shadow: 0 0 15px rgba(0,242,255,0.3);
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    border: none;
+    font-family: 'Space Grotesk', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, #00f2ff, #6a00ff);
+    color: #000;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 25px rgba(0,242,255,0.5);
+}
+
+#errorMsg {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 13px;
+    color: #ff6b6b;
+}
+
+.footer-note {
+    margin-top: 25px;
+    text-align: center;
+    font-size: 11px;
+    color: #5f6a72;
+    letter-spacing: 1px;
+}
+</style>
+</head>
+<body>
+
+<div class="login-container">
+    <div class="brand">VIGILANT NEON</div>
+    <div class="title">Secure Admin Access</div>
+
+    <div class="input-group">
+        <input type="email" id="email" placeholder="System Identity / Email">
+    </div>
+
+    <div class="input-group">
+        <input type="password" id="password" placeholder="Security Cipher">
+    </div>
+
+    <button onclick="login()">Initialize Access</button>
+
+    <div id="errorMsg"></div>
+
+    <div class="footer-note">
+        CRYPTO ENGINE • AUTH LAYER • SESSION VERIFIED
+    </div>
+</div>
+
+<script>
+async function login() {
+
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    const res = await fetch("/smartdoctor/api/login.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ email, password })
+    });
+
+    const data = await res.json();
+
+    if (data.status === "success") {
+        window.location.href = "/smartdoctor/";
+    } else {
+        document.getElementById("errorMsg").innerText = data.message;
+    }
+}
+</script>
+
+</body>
+</html>
