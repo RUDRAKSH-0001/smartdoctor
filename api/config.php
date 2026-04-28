@@ -4,11 +4,19 @@
  * Fill in your MySQL password below.
  */
 
-define('DB_HOST', '127.0.0.1');
-define('DB_PORT', '3306');
-define('DB_NAME', 'smart_hospital');
-define('DB_USER', 'root');
-define('DB_PASS', '');  // <-- Fill your MySQL root password here
+$host = getenv('DB_HOST') ?: '127.0.0.1';
+$port = getenv('DB_PORT') ?: '3306';
+$dbname = getenv('DB_NAME') ?: 'smart_hospital';
+$username = getenv('DB_USER') ?: 'root';
+$password = getenv('DB_PASS') ?: '';
+
+$dsn = "mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4";
+
+$pdo = new PDO($dsn, $username, $password, [
+    PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false,
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+]);
 
 // Gemini API
 define('GEMINI_API_KEY', 'AIzaSyALWy7LxqWj8MzEFZ5xybHanECVMmiAw28');
