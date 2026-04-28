@@ -42,11 +42,24 @@ function getDB(): PDO {
 
     if ($pdo === null) {
 
-        $host = getenv('DB_HOST') ?: '127.0.0.1';
-        $port = getenv('DB_PORT') ?: '3306';
-        $dbname = getenv('DB_NAME') ?: 'smart_hospital';
-        $username = getenv('DB_USER') ?: 'root';
-        $password = getenv('DB_PASS') ?: '';
+        $connectionUrl = getenv('DATABASE_URL');
+
+        if ($connectionUrl) {
+            $url = parse_url($connectionUrl);
+
+            $host = $url['host'];
+            $port = $url['port'];
+            $username = $url['user'];
+            $password = $url['pass'];
+            $dbname = ltrim($url['path'], '/');
+
+        } else {
+            $host = getenv('DB_HOST') ?: '127.0.0.1';
+            $port = getenv('DB_PORT') ?: '3306';
+            $dbname = getenv('DB_NAME') ?: 'smart_hospital';
+            $username = getenv('DB_USER') ?: 'root';
+            $password = getenv('DB_PASS') ?: '';
+        }
 
         $dsn = "mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4";
 
