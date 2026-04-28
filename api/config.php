@@ -3,6 +3,7 @@
  * Smart Hospital — Database Configuration
  * Fill in your MySQL password below.
  */
+die("CONFIG LOADED FROM NEW VERSION");
 
 $host = getenv('DB_HOST') ?: '127.0.0.1';
 $port = getenv('DB_PORT') ?: '3306';
